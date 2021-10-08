@@ -1,0 +1,27 @@
+version: "3"
+
+services: 
+    web:
+        container_name: healthcare-act
+        restart: always
+        build: .
+        ports:
+            - "5001:5001"
+    
+            
+        links:
+            - mongo
+        volumes:
+            - .:/usr/src/app
+    mongo:
+        container_name: mongodatabase-activity
+        image: mongo:4.4
+        ports: 
+            - "27019:27011" 
+        logging:
+            driver: none
+
+networks:
+    default:
+        external: true
+        name: br0
